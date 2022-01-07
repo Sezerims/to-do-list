@@ -14,6 +14,7 @@
 <body>
 
     <h1>Hello!</h1>
+
     <h2><%= date %></h2>
     <% if(day === "Friday" || day === "Sunday") { %>
     <h2 style="color: darkslateblue"><%= day %></h2>
@@ -23,6 +24,18 @@
     JS code "for control-flow" can be written in it.
     JS code on EACH LINE should be wrapped with this tag!
     -->
+
+    <ul>
+        <% for(var i = 0; i < todo.length; i++) { %>
+            <li><%= todo[i] %></li>
+        <% } %>
+    </ul>
+
+    <form action="/" method="post">
+        <input type="text" placeholder="New Item" name="newItem">
+
+        <button type="submit">Add Item</button>
+    </form>
 
     <!-- Scripts -->
     <script src="js/index.js"></script>

@@ -1,17 +1,24 @@
-// Set express
+// Set up express
 const express = require('express');
 const app = express();
 
-// Set ejs
+// Set up urlencoded parser to parse incoming form data.
+app.use(express.urlencoded({extended: true}));
+
+// Set up ejs
 app.set('view engine', 'ejs');
 
-// Set public folder
+// Set up public folder
 app.use(express.static('public'));
+
+let toDoList = [];
 
 app.get("/", function(req, res) {
 
+    // new Date() -with no arguments- returns the current date.
     const currentDate = new Date();
 
+    /*
     const dayOfWeek = currentDate.getDay(); // Sun: 0, ... Sat: 6
     const dayOfMonth = currentDate.getDate();
     const currentMonth = currentDate.getMonth(); // Jan: 0, ... Dec: 11
@@ -21,17 +28,38 @@ app.get("/", function(req, res) {
     const currentMonthName = monthName(currentMonth);
 
     const currentDateText = currentMonthName + " " + dayOfMonth + ", " + currentYear;
+    */
 
-    res.render("list", {date: currentDateText, day: currentDayName});
-//    res.sendFile(__dirname + "/index.html");
+    let options = {
+        // weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }
+
+    // currentDate.toLocaleString() = currentDate.toLocaleDateString() + currentDate.toLocaleTimeString()
+    const currentDateText = currentDate.toLocaleDateString("en-US", options);
+    const currentDayName = currentDate.toLocaleDateString("en-US", {weekday: 'long'});
+    // Pass [] into locales for the default location.
+
+    res.render("list", {date: currentDateText, day: currentDayName, todo: toDoList});
+    // res.sendFile(__dirname + "/index.html");
 })
 
+app.post("/", function(req, res) {
+    toDoList.push(req.body.newItem);
+
+    res.redirect("/");
+})
+
+// Listen at port 3000
 const port = 3000;
 
 app.listen(port, function() {
     console.log("Server running on port " + port);
 })
 
+/*
 function dayName(dayNumber) {
     switch (dayNumber) {
         case 0:
@@ -98,3 +126,4 @@ function monthName(monthNumber) {
             break;
     }
 }
+*/
