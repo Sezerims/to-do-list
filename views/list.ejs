@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>To-Do List ✔</title>
+
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <h1>Hello!</h1>
+    <h2><%= date %></h2>
+    <% if(day === "Friday" || day === "Sunday") { %>
+    <h2 style="color: darkslateblue"><%= day %></h2>
+    <% } else { %>
+    <h2 style="color: deeppink"><%= day %></h2>
+    <% } %> <!-- This is the "Scriplet" Tag.
+    JS code "for control-flow" can be written in it.
+    JS code on EACH LINE should be wrapped with this tag!
+    -->
+
+    <!-- Scripts -->
+    <script src="js/index.js"></script>
+
+</body>
+
+</html>
