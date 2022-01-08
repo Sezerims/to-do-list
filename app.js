@@ -46,8 +46,6 @@ app.post("/", function(req, res) {
         toDoList.push(req.body.newItem);
     }
 
-    console.log(req.body)
-
     res.redirect("/");
 })
 
