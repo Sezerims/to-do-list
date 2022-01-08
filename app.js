@@ -35,14 +35,18 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res) {
 
+    let button = req.body.button;
     let newListItem = req.body.newItem;
 
+    if(button === "clear") {
+        toDoList = []
+    }
     // Check if empty string, null, or all whitespace before pushing into array.
-    if(newListItem === "*clear*") {
-        toDoList = [];
-    } else if(!!newListItem && !!newListItem.trim()) {
+    else if(!!newListItem && !!newListItem.trim()) {
         toDoList.push(req.body.newItem);
     }
+
+    console.log(req.body)
 
     res.redirect("/");
 })

@@ -9,13 +9,16 @@
     <!-- Favicon -->
     <link rel="icon" href="icons/favicon.ico">
 
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,200;0,300;0,400;0,700;1,200;1,300;1,400;1,700&display=swap" rel="stylesheet">
-
-    <!-- Style Sheets -->
-    <link rel="stylesheet" href="css/styles.css">
 
 </head>
 
@@ -24,7 +27,7 @@
     <div class="box-container">
         <div class="text-wrapper">
             <h1 class="title">To-Do List for:</h1>
-            <h2><%= date %><br><%= day %></h2>
+            <h2><%= date %> <span class="today"><%= day %></span></h2>
         </div>
     </div>
 
@@ -33,6 +36,7 @@
             <% for(var i = 0; i < todo.length; i++) { %>
                 <li>
                     <input type="checkbox">
+                    <span class="tooltip tooltip-cross-out">cross out item</span>
                     <span class="item"><%= todo[i] %></span>
                 </li>
             <% } %>
@@ -40,15 +44,19 @@
 
         <form class="new-item-form" action="/" method="post">
             <input type="text" placeholder="New Item" name="newItem" autocomplete="off" autofocus>
-            <button class="add-button" type="submit">+</button>
-        </form>
-    </div>
 
-    <div class="box-container">
-        <div class="text-wrapper">
-            <h2 class="title">Hint:</h2>
-            <h3>You can add <em>*clear*</em> as a new item to wipe the list.</h3>
-        </div>
+            <div class="button-container">
+                <button class="add-button" type="submit" name="button" value="add">+</button>
+                <span class="tooltip tooltip-add">add item to list</span>
+            </div>
+
+            <div class="button-container">
+                <button class="clear-button" type="submit" name="button" value="clear"><i class="far fa-trash-alt"></i></button>
+                <span class="tooltip tooltip-clear">clear list</span>
+            </div>
+
+        </form>
+
     </div>
 
 </body>

@@ -18,6 +18,10 @@ h3 {
     font-size: 1.3rem;
 }
 
+.today {
+    color: orangered;
+}
+
 .box-container {
     background-color: #F6F6F6;
     width: 25rem;
@@ -62,6 +66,7 @@ ul {
 li {
     box-shadow: 0 1px #98DED9;
     padding: 1rem;
+    position: relative;
 }
 
 li:first-child {
@@ -75,24 +80,29 @@ li:last-child {
 .item {
     margin: 0;
     word-wrap: break-word;
+    transition: color 0.3s linear;
 }
 
 /* Custom Checkbox */
 
 input[type="checkbox"] {
-    appearance: unset;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     border: 1px solid #98DED9;
     border-radius: 100%;
+    box-shadow: 0 0 3px #98DED9;
     cursor: pointer;
     height: 1rem;
     width: 1rem;
     padding: 0;
     margin: 0 0.25rem 0 0;
-    transition: background-color 0.3s;
+    transition: 0.3s;
 }
 
 input[type="checkbox"]:hover {
     background-color: #98DED9;
+    opacity: 0.8;
     transition: 0.3s;
 }
 
@@ -101,7 +111,7 @@ input[type="checkbox"]:checked {
 }
 
 input[type="checkbox"]:checked+.item {
-    text-decoration:line-through #98DED9;
+    text-decoration:line-through orangered;
     color: #98DED9;
     transition: color 0.3s;
 }
@@ -110,14 +120,21 @@ input[type="checkbox"]:checked+.item {
 
 .new-item-form {
     padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+    display: grid;
+    grid-column-gap: 1rem;
+    grid-template-columns: 15rem min-content min-content;
+
+    position: relative;
+}
+
+input[type="text"] {
+    flex-shrink: 1;
 }
 
 input[type="text"]:focus {
     outline: none;
-    caret-color: #98DED9;
+    caret-color: orangered;
 }
 
 ::placeholder {
@@ -130,20 +147,88 @@ input[type="text"]:focus::placeholder {
     transition: 0.3s;
 }
 
-.add-button {
+/* Buttons */
+
+.button-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.add-button, .clear-button {
     cursor: pointer;
     border: none;
     padding: 0;
 
     border-radius: 100%;
-    background-color: #98DED9;
     color: white;
 
-    font-size: 3rem;
     height: 3rem;
     width: 3rem;
 
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.add-button {
+    font-size: 3rem;
+    background-color: #98DED9;
+    box-shadow: 0 0 3px #98DED9;
+    transition: 0.3s;
+}
+
+.clear-button {
+    font-size: 1.7rem;
+    background-color: orangered;
+    box-shadow: 0 0 3px orangered;
+    transition: 0.3s;
+}
+
+.add-button:hover,
+.clear-button:hover {
+    opacity: 0.9;
+    transition: 0.3s;
+}
+
+/* Tooltips */
+
+.tooltip {
+    background: #98DED9;
+    box-shadow: 0 0 3px #98DED9;
+    color: white;
+
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 200;
+
+    padding: 0.175rem 0.375rem;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transition: 0.3s;
+}
+
+.tooltip-cross-out {
+    left: -8.5rem;
+}
+
+.tooltip-add,
+.tooltip-clear {
+    top: 3.5rem;
+}
+
+.tooltip-clear {
+    background-color: orangered;
+    box-shadow: 0 0 3px orangered;
+}
+
+input[type="checkbox"]:hover+.tooltip,
+.add-button:hover+.tooltip,
+.clear-button:hover+.tooltip {
+    visibility: visible;
+    opacity: 0.9;
+    transition: 1s;
+    transition-delay: 1s;
 }
