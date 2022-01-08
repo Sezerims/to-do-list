@@ -224,7 +224,7 @@ input[type="text"]:focus::placeholder {
     box-shadow: 0 0 3px orangered;
 }
 
-input[type="checkbox"]:hover+.tooltip,
+input[type="checkbox"]:hover~.tooltip,
 .add-button:hover+.tooltip,
 .clear-button:hover+.tooltip {
     visibility: visible;
