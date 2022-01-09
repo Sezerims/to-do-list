@@ -2,35 +2,22 @@
 const express = require('express');
 const app = express();
 
+// Set up date.js module
+const date = require(__dirname + '/date.js');
+
 // Set up urlencoded parser to parse incoming form data.
 app.use(express.urlencoded({extended: true}));
-
-// Set up ejs
-app.set('view engine', 'ejs');
 
 // Set up public folder
 app.use(express.static('public'));
 
+// Set up ejs
+app.set('view engine', 'ejs');
+
 let toDoList = [];
 
 app.get("/", function(req, res) {
-
-    // new Date() -with no arguments- returns the current date.
-    const currentDate = new Date();
-
-    let options = {
-        // weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    }
-
-    // currentDate.toLocaleString() = currentDate.toLocaleDateString() + currentDate.toLocaleTimeString()
-    const currentDateText = currentDate.toLocaleDateString([], options);
-    const currentDayName = currentDate.toLocaleDateString([], {weekday: 'long'});
-    // Pass [] into locales for the default location.
-
-    res.render("list", {date: currentDateText, day: currentDayName, todo: toDoList});
+    res.render("list", {date: date.currentDateText, day: date.currentDayName, todo: toDoList});
 })
 
 app.post("/", function(req, res) {
