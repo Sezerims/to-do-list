@@ -1,6 +1,5 @@
 body {
-    background-color: #98DED9;
-    background-image: -webkit-linear-gradient(65deg, #98DED9, #161D6F);
+    background: linear-gradient(25deg, #98DED9, #161D6F);
     min-height: 100vh;
     margin: 0;
     font-family: 'Be Vietnam Pro', sans-serif;
@@ -21,7 +20,7 @@ h3 {
     font-size: 1.3rem;
 }
 
-.today {
+.accented {
     color: orangered;
 }
 
@@ -74,7 +73,6 @@ ul {
 li {
     box-shadow: 0 1px #98DED9;
     padding: 1rem;
-    position: relative;
 }
 
 li:first-child {
@@ -88,40 +86,60 @@ li:last-child {
 .item {
     margin: 0;
     word-wrap: break-word;
-    transition: color 0.3s linear;
+    transition: 0.3s linear;
 }
 
 /* Custom Checkbox */
 
-input[type="checkbox"] {
+.list-items-form {
+    position: relative;
+}
+
+.checkbox {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    border: 1px solid #98DED9;
-    border-radius: 100%;
-    box-shadow: 0 0 3px #98DED9;
+
+    height: 1.25rem;
+    width: 1.25rem;
+
+    margin: -6px 3px -1px 0;
+
+    border: 2px solid #98DED9;
+    border-radius: 50%;
+
     cursor: pointer;
-    height: 1rem;
-    width: 1rem;
-    padding: 0;
-    margin: 0 0.25rem 0 0;
     transition: 0.3s;
 }
 
-input[type="checkbox"]:hover {
+.checkbox:hover {
     background-color: #98DED9;
     opacity: 0.8;
     transition: 0.3s;
 }
 
-input[type="checkbox"]:checked {
+.checkbox:checked {
     background-color: #98DED9;
 }
 
-input[type="checkbox"]:checked+.item {
-    text-decoration:line-through orangered;
+.check {
+    position: absolute;
+    visibility: hidden;
+    color: orangered;
+    opacity: 0;
+    transition: 0.3s;
+    margin-left: 4px;
+}
+
+.checkbox:checked ~ .check{
+    visibility: visible;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.checkbox:checked ~ .item {
     color: #98DED9;
-    transition: color 0.3s;
+    transition: 0.3s linear;
 }
 
 /* Text Input and Add Button */
@@ -157,19 +175,12 @@ input[type="text"]:focus::placeholder {
 
 /* Buttons */
 
-.button-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
-
 .add-button, .clear-button {
     cursor: pointer;
     border: none;
     padding: 0;
 
-    border-radius: 100%;
+    border-radius: 50%;
     color: white;
 
     height: 3rem;
@@ -196,12 +207,13 @@ input[type="text"]:focus::placeholder {
 
 .add-button:hover,
 .clear-button:hover {
-    opacity: 0.9;
+    opacity: 0.8;
     transition: 0.3s;
 }
 
 /* Tooltips */
 
+/*
 .tooltip {
     background: #98DED9;
     box-shadow: 0 0 3px #98DED9;
@@ -233,14 +245,15 @@ input[type="text"]:focus::placeholder {
     box-shadow: 0 0 3px orangered;
 }
 
-input[type="checkbox"]:hover~.tooltip,
-.add-button:hover+.tooltip,
-.clear-button:hover+.tooltip {
+.checkbox:hover ~ .tooltip,
+.add-button:hover + .tooltip,
+.clear-button:hover + .tooltip {
     visibility: visible;
     opacity: 0.9;
     transition: 1s;
     transition-delay: 1s;
 }
+*/
 
 /* Footer */
 

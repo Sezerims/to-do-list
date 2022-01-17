@@ -1,2 +1,3 @@
 # To-Do List
-If you are unsure what a button does, hover over it for a tip.
+## To create a custom list / go to an existing custom list:
+add "/'custom list name'" at the end of root route.
