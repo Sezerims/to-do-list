@@ -78,12 +78,12 @@ app.get("/", function(req, res) {
                     items: defaultItems
                 });
 
-                // Insert default items into the items collection
+                // Insert default items into the list
                 mainList.save(function(err) {
                     if(err)
                         console.log(err);
                     else {
-                        console.log("Default items are inserted into the items collection.");
+                        console.log("Default items are inserted into " + mainListName + " List.");
                         res.redirect("/");
                     }
                 });
@@ -120,12 +120,12 @@ app.get("/:listName", function(req, res) {
                     items: defaultItems
                 });
 
-                // Insert default items into the items collection
+                // Insert default items into the list
                 newList.save(function(err) {
                     if(err)
                         console.log(err);
                     else {
-                        console.log("Default items are inserted into the items collection.");
+                        console.log("Default items are inserted into " + customListName + " List.");
                         res.redirect("/" + customListName);
                     }
                 });
@@ -140,16 +140,16 @@ app.get("/:listName", function(req, res) {
 // POST to Main/Custom List Page: Add Item / Drop List
 app.post("/:listName", function(req, res) {
 
-    var customListName = req.params.listName;
+    let customListName = req.params.listName;
 
     let clickedButton = req.body.button;
 
-    console.log(clickedButton)
+    console.log("The " + clickedButton + " button was clicked.");
 
     List.findOne({ name: customListName }, function(err, customList) {
 
         if(err)
-            console.log(err)
+            console.log(err);
         else {
             if(clickedButton === "clear") {
                 customList.collection.drop(function(err){
@@ -158,8 +158,7 @@ app.post("/:listName", function(req, res) {
                     else {
                         console.log(customListName + " List deleted.");
                         res.redirect("/");
-                        // Redirect to Main List when a custom list is deleted
-                        // to prevent the custom list from being created again.
+                        // Redirect to Main List when a custom list is deleted to prevent the custom list from being created again.
                     }
                 });
             } else if(clickedButton === "add") {
@@ -174,7 +173,7 @@ app.post("/:listName", function(req, res) {
                     if(err)
                         console.log(err);
                     else
-                        console.log(newItem + " is inserted into" + customListName + " List.");
+                        console.log(newItem + " is inserted into " + customListName + " List.");
                 });
                 res.redirect("/" + customListName);
             }
@@ -186,12 +185,6 @@ app.post("/:listName/check", function(req, res) {
 
     let checkedItemId = req.body.itemId;
     let listName = req.body.listName;
-
-    console.log("Checked item ID: " + checkedItemId);
-    console.log("List Name: " + listName);
-
-    let checkbox = req.body.checkbox;
-    console.log(checkbox); // checkbox when you check it, undefined when you uncheck it
 
     List.findOneAndUpdate({ name: listName }, { $pull: { items: { _id: checkedItemId } } }, function(err, thisList) {
         if(err)
