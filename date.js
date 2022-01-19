@@ -1,4 +1,4 @@
-// This module is used to format current date
+// This module formats current date
 
 let currentDate = new Date();
 

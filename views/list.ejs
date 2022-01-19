@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+</head>
 
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title><%= title %> List ✔</title>
 
     <!-- Favicon -->
@@ -35,29 +39,28 @@
         <ul>
             <% todo.forEach(function(item){ %>
                 <li>
-                    <form class="list-items-form" action="/check" method="post">
-                        <input class="checkbox" id="checkbox" type="checkbox" name="checkItem" value="<%= item._id %>">
+                    <form class="list-items-form" action="/<%= title %>/check" method="post">
+                        <input class="checkbox" id="checkbox" type="checkbox" name="checkbox" value="checkbox" onclick="this.form.submit()">
                         <span class="item"><%= item.value %></span>
-                        <!-- <span class="tooltip tooltip-cross-out">cross out item</span> -->
                         <i class="fas fa-check check"></i>
+
+                        <input type="hidden" name="itemId" value="<%= item._id %>">
+                        <input type="hidden" name="listName" value="<%= title %>">
                     </form>
                 </li>
             <% }); %>
         </ul>
 
+        <input type="hidden">
+
         <form class="new-item-form" action="/<%= title %>" method="post">
             <input type="text" placeholder="New Item" name="newItem" autocomplete="off" autofocus>
 
             <!-- <div class="button-container"> -->
-                <button class="add-button" type="submit" name="button" value="add">+</button>
-                <!-- <span class="tooltip tooltip-add">add item to list</span>
-            </div> -->
+            <button class="add-button" type="submit" name="button" value="add">+</button>
 
             <!-- <div class="button-container"> -->
-                <button class="clear-button" type="submit" name="button" value="clear"><i class="far fa-trash-alt"></i></button>
-                <!-- <span class="tooltip tooltip-clear">clear list</span>
-            </div> -->
-
+            <button class="clear-button" type="submit" name="button" value="clear"><i class="far fa-trash-alt"></i></button>
         </form>
 
     </div>

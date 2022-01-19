@@ -54,11 +54,12 @@ const List = mongoose.model("List", listSchema);
 // Create default list items
 const defaultItems = [
     {_id: 1, value: "Click the + icon or hit enter to add a new item to this list."},
-    {_id: 2, value: "<-- Click on this to cross out an item."},
+    {_id: 2, value: "<-- Click on this to remove this item from this list."},
     {_id: 3, value: "Click on the trash icon to delete this list."}
 ];
 
 // GET Home Page
+
 app.get("/", function(req, res) {
 
     let mainListName = "To-Do";
@@ -138,49 +139,14 @@ app.get("/:listName", function(req, res) {
     });
 });
 
-app.post("/check", function(req, res) {
-
-    let checkedItemId = req.body.checkItem;
-
-    console.log(checkedItemId);
-
-    /*
-    Item.findOneAndUpdate({ _id: checkedItemId }, {
-       checked: true
-    }, function(err, item) {
-        if(err)
-            console.log(err);
-        else
-            console.log("Item is checked:");
-    });
-    */
-
-    List.findOne({ name: "To-Do" }, function(err, mainList) {
-        if(err)
-            console.log(err);
-        else
-        {
-            /*
-            Item.findOneAndRemove({ _id: checkedItemId }, function(err) {
-                if(err)
-                    console.log(err);
-                else {
-                    console.log("Item removed from the list.");
-                    res.redirect("/");
-                }
-            });
-            */
-        }
-    });
-
-});
-
 // POST to Main/Custom List Page: Add Item / Drop List
 app.post("/:listName", function(req, res) {
 
-    let customListName = req.params.listName;
+    var customListName = req.params.listName;
 
     let clickedButton = req.body.button;
+
+    console.log(clickedButton)
 
     List.findOne({ name: customListName }, function(err, customList) {
 
@@ -228,6 +194,27 @@ app.post("/:listName", function(req, res) {
         toDoList.push(req.body.newItem);
     }
     */
+});
+
+app.post("/:listName/check", function(req, res) {
+
+    let checkedItemId = req.body.itemId;
+    let listName = req.body.listName;
+
+    console.log("Checked item ID: " + checkedItemId);
+    console.log("List Name: " + listName);
+
+    let checkbox = req.body.checkbox;
+    console.log(checkbox); // checkbox when you check it, undefined when you uncheck it
+
+    List.findOneAndUpdate({ name: listName }, { $pull: { items: { _id: checkedItemId } } }, function(err, thisList) {
+        if(err)
+            console.log(err);
+        else {
+            console.log(thisList);
+            res.redirect("/" + listName);
+        }
+    });
 });
 
 // Listen at port 3000
