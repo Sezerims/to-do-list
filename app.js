@@ -28,15 +28,15 @@ mongoose.connect("mongodb://localhost:27017/" + database, function (err) {
 
 // Create itemSchema
 const itemSchema = new mongoose.Schema({
-    _id: Number,
     value: {
         type: String,
         required: true
-    },
-    checked: {
-        type: Boolean,
-        default: false
     }
+});
+
+// Validate that item value is not falsy or all whitespace.
+itemSchema.path("value").validate(function(val) {
+   return !!(!!val && val.trim());
 });
 
 // Create Item model based on itemSchema
@@ -53,13 +53,12 @@ const List = mongoose.model("List", listSchema);
 
 // Create default list items
 const defaultItems = [
-    {_id: 1, value: "Click the + icon or hit enter to add a new item to this list."},
-    {_id: 2, value: "<-- Click on this to remove this item from this list."},
-    {_id: 3, value: "Click on the trash icon to delete this list."}
+    { value: "Click the + icon or hit enter to add a new item to this list." },
+    { value: "<-- Click on this to remove this item from this list." },
+    { value: "Click on the trash icon to delete this list." }
 ];
 
 // GET Home Page
-
 app.get("/", function(req, res) {
 
     let mainListName = "To-Do";
@@ -94,7 +93,6 @@ app.get("/", function(req, res) {
             }
         }
     });
-
 });
 
 // Redirect GET Main List Path to Home Page
@@ -165,15 +163,10 @@ app.post("/:listName", function(req, res) {
                     }
                 });
             } else if(clickedButton === "add") {
+
                 let newItemInput = req.body.newItem;
-                let newId = 1;
 
-                newId = customList.items.length + 1;
-
-                let newItem = new Item({
-                    _id: newId,
-                    value: newItemInput
-                });
+                let newItem = new Item({ value: newItemInput });
 
                 customList.items.push(newItem);
 
@@ -187,13 +180,6 @@ app.post("/:listName", function(req, res) {
             }
         }
     });
-
-    /*
-    // Check if empty string, null, or all whitespace before pushing into array.
-    else if(!!newListItem && !!newListItem.trim()) {
-        toDoList.push(req.body.newItem);
-    }
-    */
 });
 
 app.post("/:listName/check", function(req, res) {

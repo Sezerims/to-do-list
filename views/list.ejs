@@ -42,8 +42,6 @@
                     <form class="list-items-form" action="/<%= title %>/check" method="post">
                         <input class="checkbox" id="checkbox" type="checkbox" name="checkbox" value="checkbox" onclick="this.form.submit()">
                         <span class="item"><%= item.value %></span>
-                        <i class="fas fa-check check"></i>
-
                         <input type="hidden" name="itemId" value="<%= item._id %>">
                         <input type="hidden" name="listName" value="<%= title %>">
                     </form>
@@ -55,11 +53,7 @@
 
         <form class="new-item-form" action="/<%= title %>" method="post">
             <input type="text" placeholder="New Item" name="newItem" autocomplete="off" autofocus>
-
-            <!-- <div class="button-container"> -->
             <button class="add-button" type="submit" name="button" value="add">+</button>
-
-            <!-- <div class="button-container"> -->
             <button class="clear-button" type="submit" name="button" value="clear"><i class="far fa-trash-alt"></i></button>
         </form>
 

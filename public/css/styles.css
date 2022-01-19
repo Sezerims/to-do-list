@@ -86,7 +86,6 @@ li:last-child {
 .item {
     margin: 0;
     word-wrap: break-word;
-    /* transition: 0.3s; */
 }
 
 /* Custom Checkbox */
@@ -130,19 +129,6 @@ li:last-child {
     transition: 0.3s;
     margin-left: 4px;
 }
-/*
-.checkbox:checked ~ .check{
-    visibility: visible;
-    opacity: 1;
-    transition: 0.3s;
-}
-
-.checkbox:checked ~ .item {
-    color: #98DED9;
-    transition: 0.3s;
-}
-*/
-/* Text Input and Add Button */
 
 .new-item-form {
     padding: 0 1rem;
