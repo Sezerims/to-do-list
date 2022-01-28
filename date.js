@@ -10,7 +10,8 @@ let options = {
 
 let dateText = {
     currentDateText: currentDate.toLocaleDateString([], options),
-    currentDayName: currentDate.toLocaleDateString([], {weekday: 'long'})
+    currentDayName: currentDate.toLocaleDateString([], {weekday: 'long'}),
+    currentYear: currentDate.toLocaleDateString([], {year: 'numeric'})
 }
 
 module.exports = dateText;

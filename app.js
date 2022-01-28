@@ -89,7 +89,7 @@ app.get("/", function(req, res) {
                 });
             } else {
                 console.log("Showing " + thisList.name + " List.");
-                res.render("list", {date: date.currentDateText, day: date.currentDayName, title: thisList.name , todo: thisList.items});
+                res.render("list", {date: date.currentDateText, day: date.currentDayName, year: date.currentYear, title: thisList.name , todo: thisList.items});
             }
         }
     });
@@ -131,7 +131,7 @@ app.get("/:listName", function(req, res) {
                 });
             } else {
                 console.log("Showing " + thisList.name + " List.");
-                res.render("list", {date: date.currentDateText, day: date.currentDayName, title: thisList.name , todo: thisList.items});
+                res.render("list", {date: date.currentDateText, day: date.currentDayName, year: date.currentYear, title: thisList.name , todo: thisList.items});
             }
         }
     });
